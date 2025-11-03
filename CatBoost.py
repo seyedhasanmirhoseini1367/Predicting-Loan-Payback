@@ -5,11 +5,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import roc_auc_score
-import lightgbm as lgb
+
 import matplotlib.pyplot as plt
 
-# Optional: if you want CatBoost alternative
-# from catboost import CatBoostClassifier, Pool
+import lightgbm as lgb
+from catboost import CatBoostClassifier, Pool
 
 
 # ==================== PATHS ====================
@@ -252,4 +252,7 @@ cbc = CatBoostClassifier(
 cbc.fit(X_train, y_train, eval_set=(X_val, y_val), cat_features=cat_features_idx)
 val_pred_cb = cbc.predict_proba(X_val)[:,1]
 print("CatBoost val AUC:", roc_auc_score(y_val, val_pred_cb))
+
+
+
 
